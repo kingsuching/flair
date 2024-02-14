@@ -145,11 +145,17 @@ prep_source <- function(x, doc_type = "unknown") {
   #### Wrap source in appropriate code formatting tags ####
 
   if (doc_type == "pdf_document") {
+    # returns the latex code
+    b1 <- "\\documentclass{article}\n\\usepackage{minted}"
+    beginMinted <- "\\begin{minted}{R}"
+    endMinted <- "\\end{minted}"
+    code <- txt_tolatex(x)
+    x <- paste0(b1, beginMinted, "\n", code, "\n", endMinted)
 
-    stop("Knitting to pdf is not yet supported in flair.")
+    #stop("Knitting to pdf is not yet supported in flair.")
 
   } else if (doc_type == "word_document") {
-
+    # fill it in
     stop("Knitting to pdf is not yet supported in flair.")
 
   } else if (doc_type == "html_document") {
@@ -176,13 +182,14 @@ prep_source <- function(x, doc_type = "unknown") {
 
     x <- paste0("<pre class='sourceCode r'>", txt_tocode(x), "</pre>")
 
+
   } else {
 
     x <- paste0("<pre><code class='language-r'>", txt_tocode(x), "</code></pre>")
+    # change this line to latex
 
   }
 
   return(x)
 
 }
-
