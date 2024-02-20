@@ -1,25 +1,29 @@
 ---
 title: "R Notebook"
-output: 
+output:
   pdf_document:
-    keep_tex: false
-
+    keep_tex: true
+    latex_engine: pdflatex
+    #latex_engine_opts: "-shell-escape"
+#header-includes:
+#  - \usepackage{minted}
 ---
 
 ```{r}
-library(flair)
+
+devtools::load_all(".")
 ```
 
 ```{r chunk1}
-#flair::txt_tolatex("abcd")
+flair::txt_tolatex("abcd")
 ```
 
 ```{r}
 decorate("chunk1") %>%
-  flair("+")
+  flair("txt_tolatex")
 ```
 
 ```{r}
-purrr::safely(rmarkdown::all_output_formats)(knitr::current_input())
+purrr::safely(rmarkdown::all_output_formats)(knitr::current_input())$result
 ```
 

@@ -146,11 +146,12 @@ prep_source <- function(x, doc_type = "unknown") {
 
   if (doc_type == "pdf_document") {
     # returns the latex code
-    b1 <- "\\documentclass{article}\n\\usepackage{minted}"
-    beginMinted <- "\\begin{minted}{R}"
-    endMinted <- "\\end{minted}"
-    code <- txt_tolatex(x)
-    x <- paste0(b1, beginMinted, "\n", code, "\n", endMinted)
+    #b1 <- "\\documentclass{article}\n\\usepackage{minted}"
+    #beginMinted <- "\\begin{minted}{R}"
+    #endMinted <- "\\end{minted}"
+    #code <- txt_tolatex(x)
+    #x <- paste0(b1, beginMinted, "\n", code, "\n", endMinted)
+    x <- txt_tolatex(x)
 
     #stop("Knitting to pdf is not yet supported in flair.")
 

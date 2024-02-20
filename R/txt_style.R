@@ -171,6 +171,7 @@ txt_tag <- function(x, before, after){
 
 
 #' @export
+#' @rdname txt_style
 txt_tolatex <- function(x) {
   paste0("\\begin{verbatim}\n", x, "\n\\end{verbatim}")
 }

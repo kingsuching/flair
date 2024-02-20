@@ -114,40 +114,52 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(flair)}
+\NormalTok{devtools}\SpecialCharTok{::}\FunctionTok{load\_all}\NormalTok{(}\StringTok{"."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## i Loading flair
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flair}\SpecialCharTok{::}\FunctionTok{txt\_tolatex}\NormalTok{(}\StringTok{"abcd"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#flair::txt\_tolatex("abcd")}
+\NormalTok{\#\# [1] "\textbackslash{}\textbackslash{}begin\{verbatim\}\textbackslash{}nabcd\textbackslash{}n\textbackslash{}\textbackslash{}end\{verbatim\}"}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{decorate}\NormalTok{(}\StringTok{"chunk1"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{flair}\NormalTok{(}\StringTok{"+"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\usepackage{minted}
-\begin{minted}{R}
-#flair::txt_tolatex("abcd")
-\end{minted}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{purrr}\SpecialCharTok{::}\FunctionTok{safely}\NormalTok{(rmarkdown}\SpecialCharTok{::}\NormalTok{all\_output\_formats)(knitr}\SpecialCharTok{::}\FunctionTok{current\_input}\NormalTok{())}
+  \FunctionTok{flair}\NormalTok{(}\StringTok{"txt\_tolatex"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## $result
+flair::<span style="background-color:#ffff7f">txt_tolatex</span>("abcd")
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{\#\# [1] "\textbackslash{}\textbackslash{}begin\{verbatim\}\textbackslash{}nabcd\textbackslash{}n\textbackslash{}\textbackslash{}end\{verbatim\}"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{purrr}\SpecialCharTok{::}\FunctionTok{safely}\NormalTok{(rmarkdown}\SpecialCharTok{::}\NormalTok{all\_output\_formats)(knitr}\SpecialCharTok{::}\FunctionTok{current\_input}\NormalTok{())}\SpecialCharTok{$}\NormalTok{result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
 ## [1] "pdf_document"
-## 
-## $error
-## NULL
 \end{verbatim}
 
 \end{document}
