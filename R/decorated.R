@@ -156,9 +156,7 @@ prep_source <- function(x, doc_type = "unknown") {
     #stop("Knitting to pdf is not yet supported in flair.")
 
   } else if (doc_type == "word_document") {
-    # fill it in
-    stop("Knitting to pdf is not yet supported in flair.")
-
+    x <- paste0(x) # format as plain text
   } else if (doc_type == "html_document") {
 
     x <- paste0("<pre class='prettyprint'>", txt_tocode(x), "</pre>")
