@@ -24,6 +24,9 @@ decorate("chunk1") %>%
 ```
 
 ```{r}
-purrr::safely(rmarkdown::all_output_formats)(knitr::current_input())$result
+yaml <- rmarkdown::yaml_front_matter("knitPDF.rmd")
+yaml[["output"]] %>%
+  names() %>%
+  .[1]
 ```
 

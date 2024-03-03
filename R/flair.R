@@ -34,7 +34,7 @@
 flair <- function(x, pattern,
                   before = NULL,
                   after = NULL, ...) {
-
+  print("flair")
   flair_rx(x, fixed(pattern), before, after, ...)
 
 }
@@ -45,6 +45,7 @@ flair <- function(x, pattern,
 flair_rx <- function(x, pattern,
                      before = NULL, after = NULL,
                      ...)  {
+  print("flair_rx")
   UseMethod("flair_rx")
 }
 
@@ -56,7 +57,7 @@ flair_rx <- function(x, pattern,
 flair_rx.decorated = function(x, pattern,
                                before = NULL, after = NULL,
                                ...) {
-
+  print("flair_rx.decorated")
   x %>%
     modify_sources(
       flair_rx,
@@ -74,8 +75,9 @@ flair_rx.decorated = function(x, pattern,
 #'
 #' @export
 flair_rx.default <- function(x, pattern,
-                             before = NULL, after = NULL,
+                             before = NULL, after = NULL
                               ...) {
+  print("flair_rx.default")
   ## Matches regular expression of pattern inside of code string
   ## Use fixed() to match exact string
 
@@ -112,7 +114,7 @@ flair_rx.default <- function(x, pattern,
 flair_quick <- function(x, pattern,
                         before = NULL, after = NULL,
                         ...){
-
+  print("flair_quick")
   my_styles <- list(...)
 
   if (!is.null(before) & !is.null(after)) {
@@ -138,7 +140,7 @@ flair_quick <- function(x, pattern,
 #' @rdname flair
 #' @export
 flair_all <- function(x, ...) {
-
+  print("flair_all")
   UseMethod("flair_all")
 
 }
@@ -146,7 +148,7 @@ flair_all <- function(x, ...) {
 #' @rdname flair
 #' @export
 flair_all.default <- function(x, ...) {
-
+  print("flair_all.default")
   flair_quick(x, ".+", ...)
 
 }
@@ -154,7 +156,7 @@ flair_all.default <- function(x, ...) {
 #' @rdname flair
 #' @export
 flair_all.decorated <- function(x, ...) {
-
+  print("flair_all.default")
   x %>%
     modify_sources(flair_quick, pattern = ".+", ...) %>%
     as_decorated()
@@ -166,7 +168,7 @@ flair_all.decorated <- function(x, ...) {
 #' @rdname flair
 #' @export
 flair_args <- function(x, ...) {
-
+  print("flair_args")
   ## argument names should always immediately follow an open parentheses or
   # comma space, and immediately preceed a space equals
   # allows alphanumerics, _, and . in value name
@@ -184,6 +186,7 @@ flair_funs <- function(x, ...) {
 
   # allows alphanumerics, _, and . in value name
   # Succeeded by: open paren
+  print("flair_funs")
   funs_regexp <- "([:alnum:]|_|\\.)+(?=\\()"
 
   flair_rx(x, funs_regexp, ...)
@@ -200,7 +203,7 @@ flair_input_vals <- function(x, ...) {
   ## OR
   # Preceeded by: open paren
   # Succeeded by: NOT an equals sign
-
+  print("flair_input_vals")
   vars_regexp1 <- "(?<=\\= ?)[^,\\)\\= ][^,\\)\\=]*[^,\\)\\= ]*(?=(\\)|,))"
   vars_regexp2 <- "(?<=\\()[^,\\)\\= ][^,\\)\\=]*[^,\\)\\= ]*(?! ?\\=)"
 
@@ -210,3 +213,17 @@ flair_input_vals <- function(x, ...) {
 }
 
 
+flair_rx_general <- function(x, pattern, before = NULL, after = NULL, ...) {
+  doctype <- knitr::current_input() %>%
+    rmarkdown::yaml_front_matter() %>%
+    names() %>%
+    pluck(1)
+  if(doctype == "pdf_document") {
+
+  }else if(doctype == "html_document") {
+
+  }else if(doctype == "slidy_presentation") {
+
+  }
+  return(x)
+}

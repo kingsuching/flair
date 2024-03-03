@@ -144,7 +144,7 @@ prep_source <- function(x, doc_type = "unknown") {
 
   #### Wrap source in appropriate code formatting tags ####
 
-  if (doc_type == "pdf_document") {
+  if (doc_type == "pdf_document" | doc_type == "latex_document") {
     # returns the latex code
     #b1 <- "\\documentclass{article}\n\\usepackage{minted}"
     #beginMinted <- "\\begin{minted}{R}"
@@ -184,11 +184,30 @@ prep_source <- function(x, doc_type = "unknown") {
 
   } else {
 
-    x <- paste0("<pre><code class='language-r'>", txt_tocode(x), "</code></pre>")
-    # change this line to latex
+    #x <- paste0("<pre><code class='language-r'>", txt_tocode(x), "</code></pre>")
+    x <- txt_tolatex(x)
 
   }
 
   return(x)
 
+}
+
+
+docType <- function(stuff) {
+  if(grepl("<pre class='prettyprint'>", stuff)) {
+    return("html_document")
+  }else if(grepl("\\begin{verbatim}", stuff)) {
+    return("pdf_document")
+  }else if (grepl("<pre class='sourceCode r'>", stuff)) {
+    return("github_document")
+  }else if (grepl("<pre class='prettyprint lang-r'>", doc_content)) {
+    return("ioslides_presentation")
+  }else if (grepl("<code class ='r hljs remark-code'>", doc_content)) {
+    return("xaringan::moon_reader")
+  }else if (grepl("<pre class='sourceCode r'><code class='sourceCode r'>", doc_content)) {
+    return("slidy_presentation")
+  }else{
+    return("unknown")
+  }
 }
